@@ -1,8 +1,8 @@
 export const colors = {
     colorPrimary: '#FE8943',
-    colorPrimaryDark: '#E85524',
+    colorPrimaryDark: '#FF5F00',
     colorSecondary: '#FFFFFF',
-    colorSecondaryDark: '#FFBD20',
+    colorSecondaryDark: '#FFFFFF',
     colorBackground: '#EFEFEF',
     colorInactive: '#EFEFEF',
     colorTransparentBackground: '#333333',

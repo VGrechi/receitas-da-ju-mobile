@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 8,
         backgroundColor: colors.colorCard,
+        borderLeftColor: colors.colorPrimary,
+        borderLeftWidth: 3,
         borderRadius: 8,
         marginBottom: 8
     },

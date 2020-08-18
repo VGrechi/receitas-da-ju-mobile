@@ -24,12 +24,8 @@ export default function RecipeList() {
         });
     })
 
-    function handleRecipecalculationPageNavigation(recipe: Recipe){
-        navigate('RecipeCalculationPage', { recipe });
-    }
-
     function handleRecipePageNavigation(editMode: boolean, recipe?: Recipe){
-        navigate('RecipePage', { editMode, recipe });
+        navigate('RecipePage', { originPage: 'RecipeList', editMode, recipe });
     }
 
     return (

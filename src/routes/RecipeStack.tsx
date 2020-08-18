@@ -2,19 +2,20 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import RecipeList from '../pages/RecipeList';
-import RecipeCalculationPage from '../pages/RecipeCalculationPage';
+import CalculationPage from '../pages/CalculationPage';
 import RecipePage from '../pages/RecipePage';
 
 import { Recipe } from '../models/models';
 
 export type RecipeStackParamList = {
     RecipeList: undefined;
-    RecipeCalculationPage: {
-        recipe: Recipe;
+    CalculationPage: {
+        recipeId: number;
     }
     RecipePage: {
+        originPage: string; 
         editMode: boolean;
-        recipe: Recipe;
+        recipe?: Recipe;
     }
 }
 
@@ -27,7 +28,7 @@ export default function RecipeStack() {
         <Navigator screenOptions={{ headerShown: false }}>
             <Screen name="RecipeList" component={RecipeList} />
             <Screen name="RecipePage" component={RecipePage} />
-            <Screen name="RecipeCalculationPage" component={RecipeCalculationPage} />
+            <Screen name="CalculationPage" component={CalculationPage} />
         </Navigator>
     );
 }

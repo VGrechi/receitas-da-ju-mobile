@@ -19,6 +19,9 @@ const RecipeItem: React.FC<RecipeItemProps> = ({recipe}) => {
 
     function generateIngredientsInline(ingredients: Ingredients[]): string{
         let inline: string = '';
+
+        if(!ingredients) return ' ';
+
         ingredients.map((i, index) => {
             if(index == 0){
                 inline += i.single.name;
@@ -29,8 +32,8 @@ const RecipeItem: React.FC<RecipeItemProps> = ({recipe}) => {
         return inline;
     }
 
-    function handleRecipeCalculationPageNavigation(){
-        navigate('RecipeCalculationPage', { recipe });
+    function handleCalculationPageNavigation(){
+        navigate('CalculationPage', { recipeId: recipe.id });
     }
 
     return (
@@ -40,7 +43,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({recipe}) => {
                 <Text style={styles.ingredients} numberOfLines={1}>{generateIngredientsInline(recipe.ingredients)}</Text>
                 
                 <View style={styles.labelsContainer}>
-                    <View style={styles.primaryLabel}>
+                    <View style={styles.primaryLabel}> 
                         <Text style={styles.labelText}>{recipe.difficulty}</Text>
                     </View>
 
@@ -49,8 +52,8 @@ const RecipeItem: React.FC<RecipeItemProps> = ({recipe}) => {
                     </View>
                 </View>
             </View>
-            <BorderlessButton onPress={handleRecipeCalculationPageNavigation} style={styles.options}>
-                <FontAwesome name="ellipsis-v" size={20} color={colors.textInSecondary} />
+            <BorderlessButton onPress={handleCalculationPageNavigation} style={styles.options}>
+                <FontAwesome name="ellipsis-v" size={20} color={colors.colorPrimaryDark} />
             </BorderlessButton>
         </View>
     );

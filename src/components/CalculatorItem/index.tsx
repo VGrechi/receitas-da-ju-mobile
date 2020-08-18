@@ -4,6 +4,7 @@ import { BorderlessButton } from 'react-native-gesture-handler';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import styles from './styles';
+import { colors } from '../../assets/themes/theme';
 
 interface CalculatorItemProps {
     label: string,
@@ -33,7 +34,7 @@ export const CalculatorItem: React.FC<CalculatorItemProps> = (props) => {
                 />
                 <Text>{' g'}</Text>
                 <BorderlessButton onPress={handleClick} style={styles.calculateButton}>
-                    <MaterialCommunityIcons name="calculator-variant" size={24} color="black" />
+                    <MaterialCommunityIcons name="calculator-variant" size={24} color={colors.colorPrimaryDark} />
                 </BorderlessButton>
             </View>
         </View>

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         padding: 8,
         width: '48%',
         backgroundColor: colors.colorSecondary,
-        borderWidth: 5,
+        borderWidth: 2,
         borderColor: colors.colorPrimary,
     },
     buttonText: {

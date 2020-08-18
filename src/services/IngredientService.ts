@@ -1,30 +1,48 @@
+import { AsyncStorage } from 'react-native';
 import { SingleIngredient } from "../models/models";
 
-const ingredients: SingleIngredient[] = [
-    {   id: 1, name: 'Farinha' },
-    {   id: 2, name: 'Leite' },
-    {   id: 3, name: 'Ovo' },
-    {   id: 4, name: 'Açucar' },
-]
 
-export function loadIngredients(): Promise<SingleIngredient[]>{
-    ingredients.sort((a, b) => (a.name > b.name) ? 1 : -1);
-    return Promise.resolve(ingredients);
+
+export async function loadIngredients(): Promise<SingleIngredient[]>{
+    const response = await AsyncStorage.getItem('ingredients');
+
+    if(response){
+        const ingredients: SingleIngredient[] = JSON.parse(response);
+        ingredients.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        return Promise.resolve(ingredients);
+    }
+    return Promise.resolve([]);
 }
 
-export function saveIngredient(ingredient: string): Promise<void>{
+export async function saveIngredient(ingredient: string): Promise<SingleIngredient[]>{
+    const response = await AsyncStorage.getItem('ingredients');
+    let ingredients: SingleIngredient[] = [];
+    if(response) ingredients = JSON.parse(response)
+
     const index = ingredients.findIndex(i => i.name === ingredient);
     if(index >= 0){
         return Promise.reject();
     }
+
     ingredients.sort((a, b) => (a.id < b.id) ? 1 : -1);
-    ingredients.push({ id: (ingredients[0].id + 1), name: ingredient });
-    return Promise.resolve();
+    const nextId = (ingredients.length == 0) ? 1 : (ingredients[0].id + 1);
+    ingredients.push({ id: nextId, name: ingredient });
+    await AsyncStorage.setItem('ingredients', JSON.stringify(ingredients));
+
+    ingredients.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    return Promise.resolve(ingredients);
 }
 
-export function updateIngredient(ingredient: SingleIngredient): Promise<void> {
+export async function updateIngredient(ingredient: SingleIngredient): Promise<SingleIngredient[]> {
+    const response = await AsyncStorage.getItem('ingredients');
+    let ingredients: SingleIngredient[] = [];
+    if(response) ingredients = JSON.parse(response);
+    
     const index = ingredients.findIndex(i => i.id === ingredient.id);
     ingredients.splice(index, 1);
     ingredients.push(ingredient);
-    return Promise.resolve();
+    await AsyncStorage.setItem('ingredients', JSON.stringify(ingredients));
+
+    ingredients.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    return Promise.resolve(ingredients);
 }

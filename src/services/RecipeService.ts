@@ -1,84 +1,71 @@
 import { Recipe } from "../models/models";
+import { AsyncStorage } from "react-native";
 
-const recipes: Recipe[] = [
-    {
-        id: 1,
-        name: 'Pão',
-        ingredients: [
-            { 
-                single: { id: 1, name: 'Farinha' },
-                value: 100,
-                percentage: 1
-            },
-            { 
-                single: { id: 2, name: 'Água' },
-                value: 60,
-                percentage: 0.6
-            },
-            { 
-                single: { id: 3, name: 'Sal' },
-                value: 2,
-                percentage: 0.02
-            },
-            { 
-                single: { id: 4, name: 'Fermento' },
-                value: 30,
-                percentage: 0.3
-            },
-        ],
-        preparationTime: 'Indeterminado',
-        difficulty: 'Fácil'
-    },
-    {
-        id: 2,
-        name: 'Bolo de Cenoura',
-        ingredients: [
-            { 
-                single: { id: 1, name: 'Farinha' },
-                value: 100,
-                percentage: 1
-            },
-            { 
-                single: { id: 5, name: 'Cenoura' },
-                value: 100,
-                percentage: 1
-            },
-            { 
-                single: { id: 6, name: 'Ovo' },
-                value: 100,
-                percentage: 1
-            },
-            { 
-                single: { id: 7, name: 'Óleo' },
-                value: 100,
-                percentage: 1
-            },
-            { 
-                single: { id: 8, name: 'Açucar' },
-                value: 100,
-                percentage: 1
-            },
-        ],
-        preparationTime: '40 min',
-        difficulty: 'Médio'
-    },
-]
+export async function loadRecipes(): Promise<Recipe[]>{
+    const response = await AsyncStorage.getItem('recipes');
+    let recipes: Recipe[] = [];
+    if(response) recipes = JSON.parse(response);
 
-export function loadRecipes(): Promise<Recipe[]>{
+    recipes.sort((a, b) => (a.name > b.name) ? 1 : -1);
     return Promise.resolve(recipes);
 }
 
-export function saveRecipe(recipe: Recipe): Promise<void> {
+export async function loadRecipeById(recipeId: number): Promise<Recipe>{
+    const response = await AsyncStorage.getItem('recipes');
+    let recipes: Recipe[] = [];
+    if(response) recipes = JSON.parse(response);
+
+    recipes = recipes.filter(r => r.id === recipeId);
+    return Promise.resolve(recipes[0]);
+}
+
+export async function saveRecipe(recipe: any): Promise<void> {
+    const response = await AsyncStorage.getItem('recipes');
+    let recipes: Recipe[] = [];
+    if(response) recipes = JSON.parse(response);
+
     const index = recipes.findIndex(r => r.name === recipe.name);
     if(index >= 0){
         return Promise.reject();
     }
+
     recipes.sort((a, b) => (a.id < b.id) ? 1 : -1);
-    recipes.push({ ...recipe, id: (recipes[0].id + 1)});
+    const nextId = (recipes.length == 0) ? 1 : (recipes[0].id + 1);
+    recipes.push({ ...recipe, id: nextId });
+    await AsyncStorage.setItem('recipes', JSON.stringify(recipes));
     return Promise.resolve();
 }
 
-export function countRecipesByIngredient(ingredientId: number): Promise<number> {
+export async function updateRecipe(recipe: Recipe): Promise<void> {
+    const response = await AsyncStorage.getItem('recipes');
+    let recipes: Recipe[] = [];
+    if(response) recipes = JSON.parse(response);
+
+    const index = recipes.findIndex(r => r.id === recipe.id);
+    recipes.splice(index, 1);
+    recipes.push(recipe);
+
+    await AsyncStorage.setItem('recipes', JSON.stringify(recipes));
+    return Promise.resolve();
+}
+
+export async function deleteRecipe(recipeId: number): Promise<void> {
+    const response = await AsyncStorage.getItem('recipes');
+    let recipes: Recipe[] = [];
+    if(response) recipes = JSON.parse(response);
+
+    const index = recipes.findIndex(r => r.id === recipeId);
+    recipes.splice(index, 1);
+
+    await AsyncStorage.setItem('recipes', JSON.stringify(recipes));
+    return Promise.resolve();
+}
+
+export async function countRecipesByIngredient(ingredientId: number): Promise<number> {
+    const response = await AsyncStorage.getItem('recipes');
+    let recipes: Recipe[] = []; 
+    if(response) recipes = JSON.parse(response);
+
     const filtered = recipes.filter(r => {
         return r.ingredients.find(i => i.single.id == ingredientId);
     });
