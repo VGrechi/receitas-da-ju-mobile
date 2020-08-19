@@ -84,49 +84,19 @@ export default function IngredientList() {
                 </TouchableOpacity>
             </View>
 
-            {/* <Modal isVisible={modalVisible} onBackButtonPress={handleHideModal} coverScreen={true}>
-            <View style={styles.modal}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Novo Ingrediente</Text>
-                </View>
-
-                <View style={styles.content}>
+            {modalVisible &&
+                <CustomModal isVisible={modalVisible} 
+                    title="Novo Ingrediente"
+                    cancelCallback={handleHideModal} 
+                    confirmCallback={save}
+                    cancelText="CANCELAR"
+                    confirmText="SALVAR">
                     <TextInput
                         style={styles.input}
                         placeholder="Ingrediente"
                         value={inputValue}
                         onChangeText={text => setInputValue(text)} />
-                </View>
-
-                <View style={styles.footer}>
-                    <View style={styles.button}>
-                        <TouchableOpacity onPress={handleHideModal}>
-                            <Text style={styles.buttonText}>CANCELAR</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.button}>
-                        <TouchableOpacity onPress={save}>
-                            <Text style={styles.buttonText}>SALVAR</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-        </Modal> */}
-            {modalVisible &&
-
-            <CustomModal isVisible={modalVisible} 
-                title="Novo Ingrediente"
-                cancelCallback={handleHideModal} 
-                confirmCallback={save}
-                cancelText="CANCELAR"
-                confirmText="SALVAR">
-                <TextInput
-                    style={styles.input}
-                    placeholder="Ingrediente"
-                    value={inputValue}
-                    onChangeText={text => setInputValue(text)} />
-            </CustomModal>
+                </CustomModal>
             }
             
 

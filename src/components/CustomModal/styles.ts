@@ -2,7 +2,11 @@ import { StyleSheet } from 'react-native';
 
 import { colors, fonts } from '../../assets/themes/theme';
 
+import globalStyles from '../../assets/styles/global';
+
 const styles = StyleSheet.create({
+    ...globalStyles,
+
     modalContainer: {
         flex: 1,
         justifyContent: "center",
@@ -28,38 +32,15 @@ const styles = StyleSheet.create({
     },
     content: {
         width: '100%',
-        minHeight: 50,
+        minHeight: 100,
         alignItems: "center",
         justifyContent: "center",
-    },
-    input: {
-        width: '90%',
-        height: 34,
-        marginVertical: 4,
-        backgroundColor: colors.colorInactive,
-        borderRadius: 8,
-        justifyContent: "center",
-        textAlign: 'center',
-        color: colors.colorBase
     },
     footer: {
         flexDirection: 'row',
         alignItems: "center",
         justifyContent: "center",
     },
-    button: {
-        width: '25%',
-        alignSelf: 'flex-end',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end',
-        padding: 4,
-        margin: 2,
-        backgroundColor: colors.colorSecondary,
-        borderColor: colors.colorSecondary,
-    },
-    buttonText: {
-        color: colors.colorPrimaryDark
-    }
 });
 
 export default styles;

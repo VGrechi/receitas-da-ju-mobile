@@ -23,12 +23,4 @@ export const timeLabels = [
     { id: 16, label: '240 min', value: '240 min' },
 ]
 
-export const proportionLabels = () => {
-    let array = [];
-    for(var i = 1 ; i <= 100 ; i++ ){
-        array.push({ id: i, label: `${i}%`, value: `${i/100}`})
-    }
-    return array;
-}
-
 

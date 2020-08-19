@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { AppLoading } from 'expo';
 import { RouteProp, useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -28,7 +28,9 @@ export const CalculationPage: React.FC<CalculationPageProps> = ({ route }) => {
     const [modalVisible, setModalVisible] = useState(false);
 
     useFocusEffect(() => {
-        loadRecipeById(route.params.recipe.id).then((response) => setRecipe(response));
+        loadRecipeById(route.params.recipeId).then((response) => setRecipe(response));
+        /* useCallback(() => {
+        }, []); */
     });
 
     function handleCalculation(field: string, value: number){
@@ -60,7 +62,9 @@ export const CalculationPage: React.FC<CalculationPageProps> = ({ route }) => {
     }
 
     function handleRecipeDeletion(){
-        deleteRecipe(recipe.id).then(() => goBack());
+        if(recipe){
+            deleteRecipe(recipe.id).then(() => goBack());
+        }
     }
 
     function handleDeleteButton(){
@@ -76,13 +80,13 @@ export const CalculationPage: React.FC<CalculationPageProps> = ({ route }) => {
     }else{
         return (
             <View>
-                <PageHeader title={recipe.name} backDestination="RecipeList"/>
+                <PageHeader title={recipe ? recipe.name : ''} backDestination="RecipeList"/>
                 <View style={styles.container}>
                     <ScrollView contentContainerStyle={{
                             paddingHorizontal: 8,
                             paddingBottom: 16
                         }}>
-                            {recipe.ingredients && recipe.ingredients.map(i => {
+                            {recipe ? (recipe.ingredients && recipe.ingredients.map(i => {
                                 return (
                                     <CalculatorItem
                                         key={i.single.id}
@@ -91,7 +95,7 @@ export const CalculationPage: React.FC<CalculationPageProps> = ({ route }) => {
                                         percentage={i.percentage}
                                         callback={handleCalculation} />
                                 )
-                            })}
+                            })) : <></>}
                     </ScrollView>
 
                     <View style={styles.buttonsContainer}>

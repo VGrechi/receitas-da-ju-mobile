@@ -1,17 +1,22 @@
 import { AsyncStorage } from 'react-native';
 import { SingleIngredient } from "../models/models";
 
-
-
 export async function loadIngredients(): Promise<SingleIngredient[]>{
     const response = await AsyncStorage.getItem('ingredients');
+    let ingredients: SingleIngredient[] = [];
+    if(response) ingredients = JSON.parse(response);
 
-    if(response){
-        const ingredients: SingleIngredient[] = JSON.parse(response);
-        ingredients.sort((a, b) => (a.name > b.name) ? 1 : -1);
-        return Promise.resolve(ingredients);
-    }
-    return Promise.resolve([]);
+    ingredients.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    return Promise.resolve(ingredients);
+}
+
+export async function loadIngredientById(ingredientId: number): Promise<SingleIngredient>{
+    const response = await AsyncStorage.getItem('ingredients');
+    let ingredients: SingleIngredient[] = [];
+    if(response) ingredients = JSON.parse(response);
+
+    ingredients = ingredients.filter(i => i.id === ingredientId);
+    return Promise.resolve(ingredients[0]);
 }
 
 export async function saveIngredient(ingredient: string): Promise<SingleIngredient[]>{

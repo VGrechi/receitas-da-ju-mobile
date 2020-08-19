@@ -36,15 +36,15 @@ export const CustomModal: React.FC<CustomModalProps> = ({ isVisible, title, chil
                 </View>
 
                 <View style={styles.footer}>
-                    <View style={styles.button}>
+                    <View style={styles.buttonSecondary}>
                         <TouchableOpacity onPress={handleCancel}>
-                            <Text style={styles.buttonText}>{cancelText.toUpperCase()}</Text>
+                            <Text style={styles.buttonSecondaryText}>{cancelText.toUpperCase()}</Text>
                         </TouchableOpacity>
                     </View>
 
-                    <View style={styles.button}>
+                    <View style={styles.buttonSecondary}>
                         <TouchableOpacity onPress={handleConfirm}>
-                            <Text style={styles.buttonText}>{confirmText.toUpperCase()}</Text>
+                            <Text style={styles.buttonSecondaryText}>{confirmText.toUpperCase()}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

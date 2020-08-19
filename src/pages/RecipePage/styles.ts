@@ -1,11 +1,11 @@
 import { StyleSheet, ColorPropType } from 'react-native';
 import { colors } from '../../assets/themes/theme';
 
+import globalStyles from '../../assets/styles/global';
+
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: colors.colorBackground
-    },
+    ...globalStyles,
+
     scroll: {
         marginTop: -10,
     },
@@ -21,14 +21,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: "space-between",
     },
-    input: {
-        height: 34,
-        marginVertical: 4,
-        backgroundColor: colors.colorInactive,
-        borderRadius: 8,
-        justifyContent: "center",
-        textAlign: 'center',
-        color: colors.colorBase
+    classificationSelect: {
+        flex: 5,
     },
     ingredientsContainer: {
         backgroundColor: colors.colorCard,
@@ -39,38 +33,21 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     ingredientBlock: {
-        width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 4,
-        marginBottom: 4,
-        borderColor: colors.colorPrimaryDark,
-        borderLeftColor: colors.colorPrimaryDark,
-        borderWidth: 1,
-        borderRadius: 8,
     },
-    inputPercentage: {
+    textPercentage: {
         flex: 1,
     },
-    inputName: {
+    textName: {
         flex: 2,
     },
-    inputValue: {
+    textValue: {
         flex: 1,
     },
-    buttonNewIngredient: {
-        padding: 8,
-        width: '48%',
-        backgroundColor: colors.colorPrimary,
-        borderColor: colors.colorPrimary,
-        borderWidth: 2,
-    },
-    buttonNewIngredientText: {
-        color: colors.textInPrimary,
-        textAlign: 'center'
-    },
     preparationContainer: {
+        minHeight: 124,
         backgroundColor: colors.colorCard,
         padding: 8,
         borderRadius: 8,
@@ -80,21 +57,21 @@ const styles = StyleSheet.create({
         minHeight: 100
     },
     buttonsContainer: {
-        paddingHorizontal: 8,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
     },
-    button: {
+    modalNameContainer: {
+        flex: 1,
         padding: 8,
-        width: '48%',
-        backgroundColor: colors.colorSecondary,
-        borderWidth: 2,
-        borderColor: colors.colorPrimary,
+        width: '100%'
     },
-    buttonText: {
-        color: colors.textInSecondary,
-        textAlign: 'center'
+    modalValuesContainer: {
+        flex: 1,
+        padding: 8,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
 })
 
