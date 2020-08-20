@@ -29,8 +29,6 @@ export const CalculationPage: React.FC<CalculationPageProps> = ({ route }) => {
 
     useFocusEffect(() => {
         loadRecipeById(route.params.recipeId).then((response) => setRecipe(response));
-        /* useCallback(() => {
-        }, []); */
     });
 
     function handleCalculation(field: string, value: number){
@@ -99,12 +97,12 @@ export const CalculationPage: React.FC<CalculationPageProps> = ({ route }) => {
                     </ScrollView>
 
                     <View style={styles.buttonsContainer}>
-                        <RectButton onPress={handleDeleteButton} style={styles.button}>
-                            <Text style={styles.buttonText}>DELETAR RECEITA</Text>
+                        <RectButton onPress={handleDeleteButton} style={styles.buttonPrimary}>
+                            <Text style={styles.buttonPrimaryText}>DELETAR RECEITA</Text>
                         </RectButton>
 
-                        <RectButton onPress={handleEditButton} style={styles.button}>
-                            <Text style={styles.buttonText}>EDITAR RECEITA</Text>
+                        <RectButton onPress={handleEditButton} style={styles.buttonPrimary}>
+                            <Text style={styles.buttonPrimaryText}>EDITAR RECEITA</Text>
                         </RectButton>
                     </View>
                 </View>

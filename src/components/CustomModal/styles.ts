@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
         lineHeight: 28,
     },
     content: {
-        width: '100%',
-        minHeight: 100,
         alignItems: "center",
         justifyContent: "center",
     },

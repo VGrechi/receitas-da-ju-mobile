@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Button } from 'react-native';
 import { BorderlessButton, ScrollView } from 'react-native-gesture-handler';
-import Modal from 'react-native-modal';
 import { Feather, Ionicons } from '@expo/vector-icons';
 
 import PageHeader from '../../components/PageHeader';
@@ -13,12 +12,14 @@ import { SingleIngredient } from '../../models/models';
 import styles from './styles';
 import { colors } from '../../assets/themes/theme';
 import CustomModal from '../../components/CustomModal';
+import CustomInput from '../../components/CustomInput';
 
 export default function IngredientList() {
 
     const [ingredients, setIngredients] = useState<SingleIngredient[]>([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const [inputError, setInputError] = useState();
     const [ingredient, setIngredient] = useState<SingleIngredient>();
 
     useEffect(() => {
@@ -35,6 +36,7 @@ export default function IngredientList() {
         setIngredient(undefined);
         setInputValue('');
         setModalVisible(false);
+        setInputError(undefined);
     }
 
     function handleShowModalForEdit(ingredient: SingleIngredient) {
@@ -44,16 +46,21 @@ export default function IngredientList() {
     }
 
     async function save() {
-        let response = [];
-        if (ingredient) {
-            response = await updateIngredient({ ...ingredient, name: inputValue });
-        } else {
-            response = await saveIngredient(inputValue);
+        try{
+            let response = [];
+            if (ingredient) {
+                response = await updateIngredient({ ...ingredient, name: inputValue });
+            } else {
+                response = await saveIngredient(inputValue);
+            }
+            setModalVisible(false);
+            setIngredients(response);
+            setIngredient(undefined);
+            setInputValue('');
+            setInputError(undefined);
+        } catch (err) {
+            setInputError(err);
         }
-        setModalVisible(false);
-        setIngredients(response);
-        setIngredient(undefined);
-        setInputValue('');
     }
 
     return (
@@ -91,11 +98,16 @@ export default function IngredientList() {
                     confirmCallback={save}
                     cancelText="CANCELAR"
                     confirmText="SALVAR">
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Ingrediente"
-                        value={inputValue}
-                        onChangeText={text => setInputValue(text)} />
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={[styles.input, (inputError ? styles.inputError : {})]}
+                            placeholder="Ingrediente"
+                            value={inputValue}
+                            onChangeText={text => setInputValue(text)} />
+                    </View>
+                        {inputError && 
+                            <Text style={styles.inputLabelError}>{inputError}</Text>
+                        } 
                 </CustomModal>
             }
             

@@ -26,7 +26,7 @@ export async function saveIngredient(ingredient: string): Promise<SingleIngredie
 
     const index = ingredients.findIndex(i => i.name === ingredient);
     if(index >= 0){
-        return Promise.reject();
+        return Promise.reject('Ingrediente já cadastrado!');
     }
 
     ingredients.sort((a, b) => (a.id < b.id) ? 1 : -1);

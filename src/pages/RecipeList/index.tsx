@@ -30,7 +30,7 @@ export default function RecipeList() {
 
     return (
         <View style={styles.container}>
-            <PageHeader title="Receitas"/>
+            <PageHeader title="Receitas" backUpOption />
             
             <ScrollView style={styles.listContainer}
                 contentContainerStyle={{

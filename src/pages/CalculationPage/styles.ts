@@ -1,7 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { fonts, colors } from '../../assets/themes/theme';
+import globalStyles from '../../assets/styles/global';
 
 const styles = StyleSheet.create({
+    ...globalStyles,
+
     container: {
         padding: 10,
     },

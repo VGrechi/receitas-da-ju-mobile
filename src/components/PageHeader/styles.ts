@@ -14,12 +14,18 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     title: {
+        flexGrow: 1,
         fontFamily: fonts.archivoBold,
         color: colors.textInPrimary,
         fontSize: 24,
         lineHeight: 24,
-        marginLeft: 16,
+        marginHorizontal: 16,
     },
+    iconsContainer: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'space-between'
+    }
 });
 
 export default styles;

@@ -1,5 +1,5 @@
 import { StyleSheet, ColorPropType } from 'react-native';
-import { colors } from '../../assets/themes/theme';
+import { colors, fonts } from '../../assets/themes/theme';
 
 import globalStyles from '../../assets/styles/global';
 
@@ -36,15 +36,29 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        marginBottom: 10
     },
     textPercentage: {
         flex: 1,
-    },
-    textName: {
-        flex: 2,
+        fontSize: 14,
+        lineHeight: 24,
+        fontFamily: fonts.poppinsSemiBold
     },
     textValue: {
         flex: 1,
+        fontSize: 14,
+        lineHeight: 24,
+        fontFamily: fonts.poppinsRegular
+    },
+    textName: {
+        flex: 4,
+        fontSize: 14,
+        lineHeight: 24,
+        fontFamily: fonts.poppinsRegular
+    },
+    listItemIcon: {
+        marginRight: 2,
+        alignSelf: 'center'
     },
     preparationContainer: {
         minHeight: 124,
@@ -62,12 +76,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     modalNameContainer: {
-        flex: 1,
         padding: 8,
-        width: '100%'
+        width: '100%',
+        flexDirection: 'row'
     },
     modalValuesContainer: {
-        flex: 1,
         padding: 8,
         width: '100%',
         flexDirection: 'row',
