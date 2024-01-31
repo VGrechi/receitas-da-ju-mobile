@@ -87,7 +87,7 @@ export default function IngredientList() {
 
             <View style={styles.fabButtonContainer}>
                 <TouchableOpacity onPress={handleShowModal} style={styles.fabButton}>
-                    <Ionicons name="ios-add" style={styles.fabButtonIcon} />
+                    <Ionicons name="add" style={styles.fabButtonIcon} />
                 </TouchableOpacity>
             </View>
 

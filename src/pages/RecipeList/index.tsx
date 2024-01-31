@@ -44,7 +44,7 @@ export default function RecipeList() {
 
             <View style={styles.fabButtonContainer}>
                 <TouchableOpacity onPress={() => handleRecipePageNavigation(true)} style={styles.fabButton}>
-                    <Ionicons name="ios-add" style={styles.fabButtonIcon}/>
+                    <Ionicons name="add" style={styles.fabButtonIcon}/>
                 </TouchableOpacity>
             </View>
         </View>
